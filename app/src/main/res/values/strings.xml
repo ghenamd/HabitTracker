@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">HabitTracker</string>
+    <string name="name">Name</string>
+    <string name="week_day">Week Day</string>
+    <string name="morning_exercise">Morning Exercise</string>
+    <string name="hours_worked">Hours Worked</string>
+    <string name="hours_slept">Hours Slept</string>
 </resources>

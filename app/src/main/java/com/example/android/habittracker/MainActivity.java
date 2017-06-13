@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.habittracker.data.HabitContract;
@@ -24,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mPersonName = (EditText)findViewById(R.id.name);
+        mWeekDay = (EditText)findViewById(R.id.week_day);
+        mMorningExercise = (EditText)findViewById(R.id.exercise);
+        mWorkHours = (EditText)findViewById(R.id.work);
+        mHoursSlept = (EditText)findViewById(R.id.hours_slept);
     }
 
     // Method to insert a new Habit
@@ -53,11 +57,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Habit saved with row id" + newRowId, Toast.LENGTH_SHORT);
         }
-
     }
-
-    //Method to display the existing table
-    private void displayDatabaseInfo() {
+    //Method that returns a cursor
+    private  Cursor cursor() {
 
         HabitDbHelper mDbHelper = new HabitDbHelper(this);
         // Create and/or open a database to read from it
@@ -71,53 +73,53 @@ public class MainActivity extends AppCompatActivity {
                 HabitContract.HabitEntry.COLUMN_HOURS_SLEPT
         };
 
-
         Cursor cursor = db.query(
                 HabitContract.HabitEntry.TABLE_NAME,
                 projection,
                 null, null,
                 null, null, null);
-        TextView displayView = (TextView) findViewById(R.id.habit);
-        try {
-            // Display the number of rows in the Cursor (which reflects the number of rows in the
-            // pets table in the database).
-
-            displayView.setText("The habits table contains " + cursor.getCount() + " habits." + "\n");
-            displayView.append("\n" + HabitContract.HabitEntry._ID + "-" +
-                    HabitContract.HabitEntry.COLUMN_PERSON_NAME + "-" +
-                    HabitContract.HabitEntry.COLUMN_WEEK_DAY + "-" +
-                    HabitContract.HabitEntry.COLUMN_MORNING_EXERCISE_MINUTES + "-" +
-                    HabitContract.HabitEntry.COLUMN_WORK_HOURS + "-" +
-                    HabitContract.HabitEntry.COLUMN_HOURS_SLEPT + "\n");
-
-            int idColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry._ID);
-            int nameColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_PERSON_NAME);
-            int weekDayColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_WEEK_DAY);
-            int exerciseColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_MORNING_EXERCISE_MINUTES);
-            int workColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_WORK_HOURS);
-            int sleepColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_HOURS_SLEPT);
-
-            while (cursor.moveToNext()) {
-                int currentID = cursor.getInt(idColumnIndex);
-                String currentName = cursor.getString(nameColumnIndex);
-                String currentWeekDay = cursor.getString(weekDayColumnIndex);
-                String currentExercise = cursor.getString(exerciseColumnIndex);
-                String currentWork = cursor.getString(workColumnIndex);
-                String currentSleep = cursor.getString(sleepColumnIndex);
-
-                displayView.append("\n" + currentID + "-"
-                        + currentName +
-                        "-" + currentWeekDay +
-                        "-" + currentExercise +
-                        "-" + currentWork +
-                        "-" + currentSleep
-                );
-            }
-
-        } finally {
-            // Always close the cursor when you're done reading from it. This releases all its
-            // resources and makes it invalid.
-            cursor.close();
-        }
+//        TextView displayView = (TextView) findViewById(R.id.habit);
+//        try {
+//            // Display the number of rows in the Cursor (which reflects the number of rows in the
+//            // pets table in the database).
+//
+//            displayView.setText("The habits table contains " + cursor.getCount() + " habits." + "\n");
+//            displayView.append("\n" + HabitContract.HabitEntry._ID + "-" +
+//                    HabitContract.HabitEntry.COLUMN_PERSON_NAME + "-" +
+//                    HabitContract.HabitEntry.COLUMN_WEEK_DAY + "-" +
+//                    HabitContract.HabitEntry.COLUMN_MORNING_EXERCISE_MINUTES + "-" +
+//                    HabitContract.HabitEntry.COLUMN_WORK_HOURS + "-" +
+//                    HabitContract.HabitEntry.COLUMN_HOURS_SLEPT + "\n");
+//
+//            int idColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry._ID);
+//            int nameColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_PERSON_NAME);
+//            int weekDayColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_WEEK_DAY);
+//            int exerciseColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_MORNING_EXERCISE_MINUTES);
+//            int workColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_WORK_HOURS);
+//            int sleepColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_HOURS_SLEPT);
+//
+//            while (cursor.moveToNext()) {
+//                int currentID = cursor.getInt(idColumnIndex);
+//                String currentName = cursor.getString(nameColumnIndex);
+//                String currentWeekDay = cursor.getString(weekDayColumnIndex);
+//                String currentExercise = cursor.getString(exerciseColumnIndex);
+//                String currentWork = cursor.getString(workColumnIndex);
+//                String currentSleep = cursor.getString(sleepColumnIndex);
+//
+//                displayView.append("\n" + currentID + "-"
+//                        + currentName +
+//                        "-" + currentWeekDay +
+//                        "-" + currentExercise +
+//                        "-" + currentWork +
+//                        "-" + currentSleep
+//                );
+//            }
+//
+//        } finally {
+//            // Always close the cursor when you're done reading from it. This releases all its
+//            // resources and makes it invalid.
+//            cursor.close();
+//        }
+        return cursor;
     }
 }
