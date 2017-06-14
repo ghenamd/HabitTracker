@@ -78,48 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 projection,
                 null, null,
                 null, null, null);
-//        TextView displayView = (TextView) findViewById(R.id.habit);
-//        try {
-//            // Display the number of rows in the Cursor (which reflects the number of rows in the
-//            // pets table in the database).
-//
-//            displayView.setText("The habits table contains " + cursor.getCount() + " habits." + "\n");
-//            displayView.append("\n" + HabitContract.HabitEntry._ID + "-" +
-//                    HabitContract.HabitEntry.COLUMN_PERSON_NAME + "-" +
-//                    HabitContract.HabitEntry.COLUMN_WEEK_DAY + "-" +
-//                    HabitContract.HabitEntry.COLUMN_MORNING_EXERCISE_MINUTES + "-" +
-//                    HabitContract.HabitEntry.COLUMN_WORK_HOURS + "-" +
-//                    HabitContract.HabitEntry.COLUMN_HOURS_SLEPT + "\n");
-//
-//            int idColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry._ID);
-//            int nameColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_PERSON_NAME);
-//            int weekDayColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_WEEK_DAY);
-//            int exerciseColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_MORNING_EXERCISE_MINUTES);
-//            int workColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_WORK_HOURS);
-//            int sleepColumnIndex = cursor.getColumnIndex(HabitContract.HabitEntry.COLUMN_HOURS_SLEPT);
-//
-//            while (cursor.moveToNext()) {
-//                int currentID = cursor.getInt(idColumnIndex);
-//                String currentName = cursor.getString(nameColumnIndex);
-//                String currentWeekDay = cursor.getString(weekDayColumnIndex);
-//                String currentExercise = cursor.getString(exerciseColumnIndex);
-//                String currentWork = cursor.getString(workColumnIndex);
-//                String currentSleep = cursor.getString(sleepColumnIndex);
-//
-//                displayView.append("\n" + currentID + "-"
-//                        + currentName +
-//                        "-" + currentWeekDay +
-//                        "-" + currentExercise +
-//                        "-" + currentWork +
-//                        "-" + currentSleep
-//                );
-//            }
-//
-//        } finally {
-//            // Always close the cursor when you're done reading from it. This releases all its
-//            // resources and makes it invalid.
-//            cursor.close();
-//        }
+
         return cursor;
     }
 }
